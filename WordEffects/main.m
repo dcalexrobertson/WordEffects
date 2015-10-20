@@ -34,7 +34,7 @@ int main(int argc, const char * argv[]) {
         
         while (true) {
             //ask user to select option
-            printf("Please select one of the following options, \n 1. Make it uppercase.\n 2. Make it lowercase. \n 3. Make it a number.\n 4. Make it Canadian.\n 5. Get a response.\n 6. Make it space-less.\n 0. Quit program. Choose the number:");
+            printf("Please select one of the following options, \n 1. Make it uppercase.\n 2. Make it lowercase. \n 3. Make it a number.\n 4. Make it Canadian.\n 5. Get a response.\n 6. Make it space-less.\n 7. Count the words.\n 8. Remove punctuation.\n 0. Quit program. Choose the number:");
             fgets(option1, 255, stdin);
             
             //converting to NSString and removing \n
@@ -80,6 +80,25 @@ int main(int argc, const char * argv[]) {
                 NSString *spacelessString = [inputString stringByReplacingOccurrencesOfString:@" " withString:@"-"];
                 NSLog(@"%@ is the result. It's memory address is %p", spacelessString, spacelessString);
                 
+            } else if ([option2 isEqualToString:@"7"]) {
+                
+                NSArray *wordCount = [inputString componentsSeparatedByString:@" "];
+                NSInteger words = [wordCount count];
+                NSLog(@"%ld is the result. It's memory address is %p", (long)words, &words);
+                
+                
+            } else if ([option2 isEqualToString:@"8"]) {
+                
+                NSString *newStr = [inputString stringByReplacingOccurrencesOfString:@"." withString:@""];
+                 newStr = [newStr stringByReplacingOccurrencesOfString:@"," withString:@""];
+                 newStr = [newStr stringByReplacingOccurrencesOfString:@"!" withString:@""];
+                 newStr = [newStr stringByReplacingOccurrencesOfString:@"?" withString:@""];
+                 newStr = [newStr stringByReplacingOccurrencesOfString:@":" withString:@""];
+                 newStr = [newStr stringByReplacingOccurrencesOfString:@";" withString:@""];
+                
+                NSLog(@"%@ is the result. It's memory address is %p", newStr, newStr);
+
+                
             } else if ([option2 isEqualToString:@"0"]) {
                 
                 break;
@@ -90,9 +109,6 @@ int main(int argc, const char * argv[]) {
                 
             }
         }
-        
-        
-        
         
     }
     return 0;
