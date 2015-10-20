@@ -26,8 +26,8 @@ int main(int argc, const char * argv[]) {
         printf("Your string is %s\n", inputChars);
         
         // convert char array to an NSString object
-        NSString *inputString1 = [NSString stringWithUTF8String:inputChars];
-        NSString *inputString = [inputString1 stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSMutableString *inputString = [NSMutableString stringWithUTF8String:inputChars];
+        [[inputString stringByReplacingOccurrencesOfString:@"\n" withString:@""] mutableCopy];
         
         // print NSString object
         NSLog(@"Input was: %@", inputString);
@@ -38,8 +38,8 @@ int main(int argc, const char * argv[]) {
             fgets(option1, 255, stdin);
             
             //converting to NSString and removing \n
-            NSString *option = [NSString stringWithUTF8String:option1];
-            NSString *option2 = [option stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            NSMutableString *option = [NSMutableString stringWithUTF8String:option1];
+            NSMutableString *option2 = [[option stringByReplacingOccurrencesOfString:@"\n" withString:@""] mutableCopy];
             
             if ([option2 isEqualToString:@"1"]) {
                 
@@ -58,14 +58,14 @@ int main(int argc, const char * argv[]) {
                 
             } else if ([option2 isEqualToString:@"4"]) {
                 
-                NSString *canadianizedString = [inputString stringByAppendingString:@", eh?"];
-                NSLog(@"%@ is the result. It's memory address is %p", canadianizedString, canadianizedString);
+                [inputString appendString:@", eh?"];
+                NSLog(@"%@ is the result. It's memory address is %p", inputString, inputString);
                 
             } else if ([option2 isEqualToString:@"5"]) {
                 
                 //logging last char for response option
                 char x = [inputString characterAtIndex:[inputString length] - 1];
-                NSString *x1 = [NSString stringWithUTF8String:&x];
+                NSMutableString *x1 = [NSMutableString stringWithUTF8String:&x];
                 
                 if ([x1 isEqualToString:@"?"]) {
                     NSLog(@"I don't know.");
@@ -77,7 +77,7 @@ int main(int argc, const char * argv[]) {
                 
             } else if ([option2 isEqualToString:@"6"]) {
                 
-                NSString *spacelessString = [inputString stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+                NSMutableString *spacelessString = [[inputString stringByReplacingOccurrencesOfString:@" " withString:@"-"] mutableCopy];
                 NSLog(@"%@ is the result. It's memory address is %p", spacelessString, spacelessString);
                 
             } else if ([option2 isEqualToString:@"7"]) {
@@ -89,12 +89,12 @@ int main(int argc, const char * argv[]) {
                 
             } else if ([option2 isEqualToString:@"8"]) {
                 
-                NSString *newStr = [inputString stringByReplacingOccurrencesOfString:@"." withString:@""];
-                 newStr = [newStr stringByReplacingOccurrencesOfString:@"," withString:@""];
-                 newStr = [newStr stringByReplacingOccurrencesOfString:@"!" withString:@""];
-                 newStr = [newStr stringByReplacingOccurrencesOfString:@"?" withString:@""];
-                 newStr = [newStr stringByReplacingOccurrencesOfString:@":" withString:@""];
-                 newStr = [newStr stringByReplacingOccurrencesOfString:@";" withString:@""];
+                NSMutableString *newStr = [[inputString stringByReplacingOccurrencesOfString:@"." withString:@""] mutableCopy];
+                 newStr = [[newStr stringByReplacingOccurrencesOfString:@"," withString:@""] mutableCopy];
+                 newStr = [[newStr stringByReplacingOccurrencesOfString:@"!" withString:@""] mutableCopy];
+                 newStr = [[newStr stringByReplacingOccurrencesOfString:@"?" withString:@""] mutableCopy];
+                 newStr = [[newStr stringByReplacingOccurrencesOfString:@":" withString:@""] mutableCopy];
+                 newStr = [[newStr stringByReplacingOccurrencesOfString:@";" withString:@""] mutableCopy];
                 
                 NSLog(@"%@ is the result. It's memory address is %p", newStr, newStr);
 
